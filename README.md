@@ -1,14 +1,56 @@
 # warshmellow-rec-sys-mat-talk
 Notes for Recommendation Systems and Matrix Factorization
 
-## Value of Recommendation vs. Traditional Recommendation: the Long Tail Problem
+## Value of Recommendation Systems vs. Traditional Recommendation: the Long Tail Problem
+
+Suppose you opened a movie store IRL, you have shelf space for 1,000 movies and you're deciding which movies you should put. Each movie is an `item`; each customer is a `user`.
+
+Several choices:
+1. 1000 copies of last year's most popular movie
+1. 1000 most popular movies from last 30 years
+1. your favorite 1000 movies
+1. etc.
+
+In all these cases, and any other case, you're limited to the shelf space of 1,000 movies, and there will be movies that you may know about but the customer will never even think about because you don't have enough space. What do you do about those movies that never make it to the shelves?
+
+Let's say we could measure the interest customers have in a movie by a single number. If you take enough movies, you can construct a graph with x-axis being the movie and y-axis being the interest, sorting by most interesting movie to the left, rightward. No matter which combination of movies you pick for your store, you will be limited to the movies more interesting than the least interesting movie in your store.
+
+This graph has a tail, but you cut it off. How do you access the movies to the right of the cutoff? That's the `Long Tail Problem`.  Recommendation systems allow you to access the entire graph to show customers.
 
 ## The Netflix Problem
 
+There are two entities: `users` and `items`. Each `user` can give a positive rating in a small range (such as 1-5) to each `item`, but does not have to, in which case the rating is blank.
+
+We want to guess each blank rating. For each blank rating for each user and item, this will tell us a guess for what the user would rate the item if they didn't yet rate.
+
+### Formulation using Utility Matrix
+We can form a sparse matrix `M` where the rows are `users` and the columns are `items` and each entry is the rating, and 0 where there is no rating. The matrix is sparse because almost every entry is 0. This matrix is the `Utility Matrix`.
+
+Take a reasonable case of say 1,000,000 users and 20,000 movie where most users will have seen fewer than 500 movies.
+### Evaluation by Root Mean Square Error
+
+Your goal is to find another matrix `N` that is not sparse (i.e. that has a guess for every rating by each user for each item) that is "close" to `M`. Closeness is measured by `Root Mean Square Error (RMSE)`. Roughly it measures how far of the guess rating will be from the real thing on average.
+
+Mathematically you take `M - N`, square all the entries, add them up then take the square root.
+
+So what's the Problem? Netflix had its own proprietary recommendation system to compute `N` given `M` called `CineMatch`. You were asked to, given `M` and an unknown test set `M'` which consisted of rows of `M` build a system to compute `N'`, a guess of `M'` whose `RMSE` was at most 90% of what CineMatch would compute. In other words, some ground truth ratings are hidden from your recommendation system and you have to guess them on average better than CineMatch.
+
 ## Two Approaches to the Netflix Problem
+Generally two approaches are taken for this problem.
+1. Content-based recommendation
+1. Collaborative-filtering based recommendation
 
-## Formulation using Utility Matrix
+Content-based asks you to roughly speaking categorize items recommend items based on these categories.
 
-## UV-factorization
+Collaborative-filtering asks you to guess ratings of items by users based on similarity of users and their ratings.
+
+## Low Rank Matrix Factorization (UV-factorization)
+One class of solutions we'll look at is based on a collaborative-filtering technique called `Low Rank Matrix Factorization`.
+
+The goal is to, given utility matrix `M`, compute two matrices `U`, `V` such that `M = UV` and `U` is "low rank", which means its number of columns `k` is much lower than the number of items. Roughly speaking, we're saying that a user's rating of an item is determined by a (linear) combination of `k` factors.
 
 ## Interpreting UV-factorization
+
+## Spark and ALS Recommendations
+
+## Serving Recommendations Fast
