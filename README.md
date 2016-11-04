@@ -47,9 +47,13 @@ Collaborative-filtering asks you to guess ratings of items by users based on sim
 ## Low Rank Matrix Factorization (UV-factorization)
 One class of solutions we'll look at is based on a collaborative-filtering technique called `Low Rank Matrix Factorization`.
 
-The goal is to, given utility matrix `M`, compute two matrices `U`, `V` such that `M = UV` and `U` is "low rank", which means its number of columns `k` is much lower than the number of items. Roughly speaking, we're saying that a user's rating of an item is determined by a (linear) combination of `k` factors.
+The goal is to, given utility matrix `M`, compute two matrices `U`, `V` such that `N = UV`, the RMSE between `M` and `N` is as small as possible, and `U` is "low rank", which means its number of columns `k` is much lower than the number of items. Roughly speaking, we're saying that a user's rating of an item is determined by a (linear) combination of `k` factors.
 
 ## Interpreting UV-factorization
+The `k` columns are roughly speaking clusters of movies. Think of them as genres and each item and user partakes in a scoring of a genre. These genres may or may not make sense to humans, like horror movies and rom-coms, vs something the computer just mined for you.
+
+## Computing the UV-factorization by Gradient Descent
+Roughly speaking, we can formulate the calculation of `N` as an optimization problem: find `U` and `V` such that `N = UV` and that minimizes RMSE of `M` and `N`. Because the square of RMSE is twice differentiable (it is the sum of squares) and because minimizing that square is the same as minimizing the RMSE, we can apply techniques of `convex optimization`. One algorithmic way to solve this optimization problem is called `Gradient Descent`. Roughly speaking, you start with guesses of `U` and `V` and then you adjust the entries of `U` and `V` in the "direction" of the greatest decrease of RMSE, i.e., in the direction of the gradient of an expression of RMSE. Eventually you'll hit a possible pair of `U` and `V` where the algorithm will stop. This may or may not be the best pair, so you may have to run the algorithm several times. In optimization speak, you only get local minima.
 
 ## Spark and ALS Recommendations
 
