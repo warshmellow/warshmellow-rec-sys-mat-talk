@@ -47,7 +47,7 @@ Collaborative-filtering asks you to guess ratings of items by users based on sim
 ## Low Rank Matrix Factorization (UV-factorization)
 One class of solutions we'll look at is based on a collaborative-filtering technique called `Low Rank Matrix Factorization`.
 
-The goal is to, given utility matrix `M`, compute two matrices `U`, `V` such that `N = UV`, the RMSE between `M` and `N` is as small as possible, and `U` is "low rank", which means its number of columns `k` is much lower than the number of items. Roughly speaking, we're saying that a user's rating of an item is determined by a (linear) combination of `k` factors.
+The goal is to, given utility matrix `M`, compute two matrices `U`, `V` such that `N = UV`, the RMSE between `M` and `N` is as small as possible, and `U` is "low rank", which means its number of columns `k` is much lower than the number of items. Roughly speaking, we're saying that a user's rating of an item is determined by a (linear) combination of `k` factors. Note that here we have to fix `k` from the beginning, then find `U` and `V`.
 
 ## Interpreting UV-factorization
 The `k` columns are roughly speaking clusters of movies. Think of them as genres and each item and user partakes in a scoring of a genre. These genres may or may not make sense to humans, like horror movies and rom-coms, vs something the computer just mined for you.
