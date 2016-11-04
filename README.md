@@ -56,5 +56,16 @@ The `k` columns are roughly speaking clusters of movies. Think of them as genres
 Roughly speaking, we can formulate the calculation of `N` as an optimization problem: find `U` and `V` such that `N = UV` and that minimizes RMSE of `M` and `N`. Because the square of RMSE is twice differentiable (it is the sum of squares) and because minimizing that square is the same as minimizing the RMSE, we can apply techniques of `convex optimization`. One algorithmic way to solve this optimization problem is called `Gradient Descent`. Roughly speaking, you start with guesses of `U` and `V` and then you adjust the entries of `U` and `V` in the "direction" of the greatest decrease of RMSE, i.e., in the direction of the gradient of an expression of RMSE. Eventually you'll hit a possible pair of `U` and `V` where the algorithm will stop. This may or may not be the best pair, so you may have to run the algorithm several times. In optimization speak, you only get local minima.
 
 ## Spark and ALS Recommendations
+We use `Apache Spark` and it comes with one Recommender System algorithm called `Alternating Least Squares (ALS)`.
+
+Very roughly speaking, the `ALS` algorithm differs from a `Gradient Descent` algorithm in that it alternately fixes `U` and `V` and optimizes the other. For a variety of mathematical reasons, the optimization can be solved by repeatedly using multiplication and inverses of several very low dimensional matrices.
+
+There are several benefits to this, chiefly being
+
+1. easier to parallelize
+1. can work with not so sparse matrices where `Gradient Descent` would be infeasible.
+
+## Explicit vs Implicit Feedback
 
 ## Serving Recommendations Fast
+Exercise for the reader :P
