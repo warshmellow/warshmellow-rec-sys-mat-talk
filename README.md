@@ -75,3 +75,8 @@ A lot of implicit feedback may be taken for the users, so the utility matrix wil
 
 ## Serving Recommendations Fast
 Exercise for the reader :P
+
+## References
+[Mining Massive Datasets, Chapter 9](http://www.mmds.org/)
+
+[Collaborative Filtering for Implicit Feedback Datasets (pdf)](http://yifanhu.net/PUB/cf.pdf)
