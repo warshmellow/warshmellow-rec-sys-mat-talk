@@ -67,5 +67,11 @@ There are several benefits to this, chiefly being
 
 ## Explicit vs Implicit Feedback
 
+`Explicit feedback` is where the user explicitly gave a rating. Getting this data may actually be infeasible. In the extreme case, if you start with a dataset in which every rating is 0, how would you make recommendations at all? Any situation in which you don't have enough data at the beginning is called the `Cold Start Problem`.
+
+One way to get around this problem is to create recommendation systems off of `Implicit Feedback`. This is where the entries of the Utility Matrix are not ratings, but could be better interpreted as "confidence". This could be as simple as the number of impressions the user has made on a product page for a movie, rather than an explicit rating the user made after watching a movie.
+
+A lot of implicit feedback may be taken for the users, so the utility matrix will not be as sparse as one with explicit feedback. The `ALS` Algorithm is designed expressly for this case.
+
 ## Serving Recommendations Fast
 Exercise for the reader :P
