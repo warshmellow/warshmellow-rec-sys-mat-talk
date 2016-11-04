@@ -6,6 +6,7 @@ Notes for Recommendation Systems and Matrix Factorization
 Suppose you opened a movie store IRL, you have shelf space for 1,000 movies and you're deciding which movies you should put. Each movie is an `item`; each customer is a `user`.
 
 Several choices:
+
 1. 1000 copies of last year's most popular movie
 1. 1000 most popular movies from last 30 years
 1. your favorite 1000 movies
@@ -37,6 +38,7 @@ So what's the Problem? Netflix had its own proprietary recommendation system to 
 
 ## Two Approaches to the Netflix Problem
 Generally two approaches are taken for this problem.
+
 1. Content-based recommendation
 1. Collaborative-filtering based recommendation
 
